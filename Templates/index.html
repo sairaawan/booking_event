@@ -1,0 +1,39 @@
+{% load crispy_forms_tags %}
+<!doctype html>
+  <html>
+  <head>
+        
+          <title>{% block head_title %}Book Event{% endblock head_title %}</title>
+         
+
+     </head>  
+      <body style="font-size: 20px; color: grey; background-color: black">
+
+        <div class="container col-4 offset-4 mb-5 mt-5" style=""> 
+        	<div class="page-header"><h1>Book Event</h1></div>
+        	<br>
+
+
+<form method="POST" enctype="multipart/form-data" action="" class="form-group " > 
+    {% csrf_token %} 
+    {{ form|crispy }} <br><br>
+
+    <input  class="btn" style="color: black" type="submit" value="Submit"> 
+    </div>
+</form> 
+
+
+
+</div>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<script src= 'https://code.jquery.com/jquery-3.5.0.min.js'></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</body>
+</html>
