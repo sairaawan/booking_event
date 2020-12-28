@@ -9,9 +9,9 @@ def createform(request):
 	form = ArtistForm(request.POST or None, request.FILES or None)
 	if form.is_valid():
 		form.save()
-		return HttpResponseRedirect('/home/success/')
+		return HttpResponseRedirect('/success/')
 	context = {'form': form}
-	return render(request, 'Index.html', context)
+	return render(request, 'index.html', context)
 
 
 def success(request):
