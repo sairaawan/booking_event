@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '#ti98$+63#u_jo$g%h#56pks78qp8%x#=m38oy06o$uc^2-zpr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1','bookingevent.herokuapp.com']
 
@@ -79,8 +79,13 @@ WSGI_APPLICATION = 'booking_event.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(BASE_DIR / 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd11mc7v5vr56nv',
+        'HOST':'ec2-52-5-176-53.compute-1.amazonaws.com',
+        'PORT': 5432,
+        'USER': 'utldiahqlesjyp',
+        'PASSWORD': 'e9eea2eb1ceffbb09f8d27359e7ee41d377d14e0187d58cea334e50b6fb680b6'
+
     }
 }
 
