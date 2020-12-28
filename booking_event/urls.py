@@ -21,8 +21,8 @@ from myapp.views import success
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', createform, name='createform' ),
-    path('home/success/', success, name='success')
+    path('', createform, name='createform' ),
+    path('success/', success, name='success')
 
 
 ]
