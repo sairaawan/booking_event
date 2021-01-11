@@ -70,7 +70,7 @@ Arts2LifeUKEvents'''
     	messagef=message.format(name=instance.Name)
     	from_email = 'arts2lifeukbooking@gmail.com'
     	
-    	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com', 'arts2lifeukmail.com'] )
+    	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com', 'arts2lifeuk@gmail.com'] )
     	#msg.attach_file("data/javascript.docx/")
     	msg.send()
 
