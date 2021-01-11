@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapp',
-    'crispy_forms'
+    'crispy_forms',
+    'django_model_changes'
 ]
 
 MIDDLEWARE = [
@@ -128,3 +129,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT=os.path.join(BASE_DIR, 'staticfiles')
+
+EMAIL_HOST= 'smtp.gmail.com'
+EMAIL_HOST_USER= 'arts2lifeukbooking@gmail.com'
+EMAIL_HOST_PASSWORD= 'AccessBooking$13'
+EMAIL_USE_TLS= True
+EMAIL_PORT= 587

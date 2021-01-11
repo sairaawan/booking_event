@@ -1,5 +1,10 @@
-from django.conf import settings
 from django.db import models
+from django.core.mail import send_mail
+from django.dispatch import receiver
+from django.db.models.signals import pre_save
+from django.conf import settings
+from django_model_changes import ChangesMixin
+from django.core.mail import EmailMessage
 from django.core.exceptions import ValidationError
 
 # Create your models here.
@@ -46,9 +51,27 @@ class Artist(models.Model):
         )
 	Additional_details=models.TextField(blank=True, null=True)
 	timestamp=models.DateTimeField(auto_now_add=True)
+	send_confirmation=models.BooleanField(default=False)
 
 
 	def __str__(self):
 		return f'{self.Name} has status {self.Status} booked on  {self.timestamp} is handled by {self.Handled_by} has booked for the following:  [ {self.Select_event}]'
+@receiver(pre_save, sender=Artist)
+def send_email_if_flag_enabled(sender, instance, **kwargs):
+    if instance.previous_instance().send_confirmation == False and instance.send_confirmation == True:
+    	subject = 'Booking Confirmation'
+    	message = '''Dear {name},
+
+Your booking has been confirmed.
+
+Regards,
+
+Arts2LifeUKEvents'''
+    	messagef=message.format(name=instance.Name)
+    	from_email = 'arts2lifeukbooking@gmail.com'
+    	
+    	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com', 'arts2lifeukmail.com'] )
+    	#msg.attach_file("data/javascript.docx/")
+    	msg.send()
 
 
