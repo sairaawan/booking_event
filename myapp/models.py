@@ -27,7 +27,7 @@ class Event(models.Model):
 	def __str__(self):
 		return f'{self.Event_Date} - {self.Position}'
 		
-class Artist(models.Model):
+class Artist(ChangesMixin,models.Model):
 	Handled_by= models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 	Name = models.CharField(max_length = 200, null=True)
 	Telephone=models.CharField(max_length = 200, null=True) 
