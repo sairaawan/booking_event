@@ -28,13 +28,13 @@ class Event(models.Model):
 		return f'{self.Event_Date} - {self.Position}'
 		
 class Artist(ChangesMixin,models.Model):
-	Handled_by= models.ForeignKey(User, null=True, blank=True)
+	Handled_by= models.ForeignKey(User, on_delete=models.null null=True, blank=True)
 	Name = models.CharField(max_length = 200, null=True)
 	Telephone=models.CharField(max_length = 200, null=True) 
 	Members=models.IntegerField(blank=True, null=True)
 	email=models.EmailField(max_length=254)
 	genre=models.CharField(max_length = 200, null=True)
-	Select_event=models.ForeignKey(Event, default=1, null=True, blank=True)
+	Select_event=models.ForeignKey(Event, on_delete=models.null default=1, null=True, blank=True)
 	pending='pending'
 
 	confirm='confirm'
