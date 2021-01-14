@@ -34,7 +34,7 @@ class Artist(ChangesMixin,models.Model):
 	Members=models.IntegerField(blank=True, null=True)
 	email=models.EmailField(max_length=254)
 	genre=models.CharField(max_length = 200, null=True)
-	Select_event=models.ForeignKey(Event, on_delete=models.SET_NULL, default=1, null=True, blank=True)
+	Select_event=models.OneToOneField(Event, on_delete=models.SET_NULL, null=True, blank=True)
 	pending='pending'
 
 	confirm='confirm'
