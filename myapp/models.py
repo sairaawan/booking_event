@@ -89,7 +89,7 @@ Arts2LifeUKEvents'''
     	from_email = 'arts2lifeukbooking@gmail.com'
     	
     	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com', 'arts2lifeukmail.com'] )
-    	msg.attach_file("data/registration.docx/")
+    	msg.attach_file("data/registration.doc/")
     	msg.send()
     if instance.previous_instance().send_contract == False and instance.send_contract == True:
     	subject = 'Contract'
