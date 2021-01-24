@@ -54,23 +54,27 @@ class Artist(ChangesMixin, models.Model):
 	send_confirmation=models.BooleanField(default=False)
 	send_application= models.BooleanField(default=False)
 	send_contract=models.BooleanField(default=False)
+	send_cancellation=models.BooleanField(default=False)
 	
 
 
 	def __str__(self):
 		return f'{self.Name} has status {self.Status} booked on  {self.timestamp} is handled by {self.Handled_by} has booked for the following:  [ {self.Select_event}]'
+
+
 @receiver(pre_save, sender=Artist)
 def send_email_if_flag_enabled(sender, instance, **kwargs):
     if instance.previous_instance().send_confirmation == False and instance.send_confirmation == True:
     	subject = 'Booking Confirmation'
     	message = '''Dear {name},
+Event name : {event}
 
-Your booking has been confirmed.
-
+You have been selected to participate in the event detailed above - we're excited to have you! 
+Please check your emails as a copy of our Performance Contract will be issued to you from the Events team in due course (unless you already have an active one).
 Regards,
 
 Arts2LifeUKEvents'''
-    	messagef=message.format(name=instance.Name)
+    	messagef=message.format(name=instance.Name, event=instance.Select_event)
     	from_email = 'arts2lifeukbooking@gmail.com'
     	
     	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com', 'arts2lifeukmail.com'] )
@@ -106,5 +110,19 @@ Arts2LifeUKEvents'''
     	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com', 'arts2lifeukmail.com'] )
     	msg.attach_file("data/contract.docx/")
     	msg.send()
+    if instance.previous_instance().send_cancellation == False and instance.send_cancellation == True:
+    	subject = 'Booking status: cancelled'
+    	message = '''Dear {name},
 
+Please be advised that you have not been selected to perform as we don't think this date is the best fit for your act. 
+We'd still love to have you perform with us, so please select another date from the drop-down list. If you have any questions, please feel free to contact the Events team.
 
+Regards,
+
+Arts2LifeUKEvents'''
+    	messagef=message.format(name=instance.Name)
+    	from_email = 'arts2lifeukbooking@gmail.com'
+    	
+    	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com', 'arts2lifeukmail.com'] )
+    	#msg.attach_file("data/contract.docx/")
+    	msg.send()
