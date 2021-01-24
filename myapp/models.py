@@ -27,14 +27,14 @@ class Event(models.Model):
 	def __str__(self):
 		return f'{self.Event_Date} - {self.Position}'
 		
-class Artist(ChangesMixin,models.Model):
+class Artist(ChangesMixin, models.Model):
 	Handled_by= models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 	Name = models.CharField(max_length = 200, null=True)
 	Telephone=models.CharField(max_length = 200, null=True) 
 	Members=models.IntegerField(blank=True, null=True)
 	email=models.EmailField(max_length=254)
 	genre=models.CharField(max_length = 200, null=True)
-	Select_event=models.OneToOneField(Event, on_delete=models.SET_NULL, null=True, blank=True)
+	Select_event=models.ForeignKey(Event, on_delete=models.SET_NULL, null=True, blank=True)
 	pending='pending'
 
 	confirm='confirm'
@@ -52,6 +52,9 @@ class Artist(ChangesMixin,models.Model):
 	Additional_details=models.TextField(blank=True, null=True)
 	timestamp=models.DateTimeField(auto_now_add=True)
 	send_confirmation=models.BooleanField(default=False)
+	send_application= models.BooleanField(default=False)
+	send_contract=models.BooleanField(default=False)
+	
 
 
 	def __str__(self):
@@ -70,8 +73,38 @@ Arts2LifeUKEvents'''
     	messagef=message.format(name=instance.Name)
     	from_email = 'arts2lifeukbooking@gmail.com'
     	
-    	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com', 'arts2lifeuk@gmail.com'] )
+    	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com', 'arts2lifeukmail.com'] )
     	#msg.attach_file("data/javascript.docx/")
+    	msg.send()
+    if instance.previous_instance().send_send_application == False and instance.send_send_application == True:
+    	subject = 'Application form'
+    	message = '''Dear {name},
+
+Plesae find the attached application form and return it back by replying to this email.
+
+Regards,
+
+Arts2LifeUKEvents'''
+    	messagef=message.format(name=instance.Name)
+    	from_email = 'arts2lifeukbooking@gmail.com'
+    	
+    	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com', 'arts2lifeukmail.com'] )
+    	msg.attach_file("data/registration.docx/")
+    	msg.send()
+    if instance.previous_instance().send_send_contract == False and instance.send_send_contract == True:
+    	subject = 'Contract'
+    	message = '''Dear {name},
+
+Plesae find the attached contract form and return it back by replying to this email.
+
+Regards,
+
+Arts2LifeUKEvents'''
+    	messagef=message.format(name=instance.Name)
+    	from_email = 'arts2lifeukbooking@gmail.com'
+    	
+    	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com', 'arts2lifeukmail.com'] )
+    	msg.attach_file("data/contract.docx/")
     	msg.send()
 
 
