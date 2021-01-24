@@ -76,7 +76,7 @@ Arts2LifeUKEvents'''
     	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com', 'arts2lifeukmail.com'] )
     	#msg.attach_file("data/javascript.docx/")
     	msg.send()
-    if instance.previous_instance().send_send_application == False and instance.send_send_application == True:
+    if instance.previous_instance().send_application == False and instance.send_application == True:
     	subject = 'Application form'
     	message = '''Dear {name},
 
@@ -91,7 +91,7 @@ Arts2LifeUKEvents'''
     	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com', 'arts2lifeukmail.com'] )
     	msg.attach_file("data/registration.docx/")
     	msg.send()
-    if instance.previous_instance().send_send_contract == False and instance.send_send_contract == True:
+    if instance.previous_instance().send_contract == False and instance.send_contract == True:
     	subject = 'Contract'
     	message = '''Dear {name},
 
