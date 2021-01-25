@@ -19,7 +19,7 @@ def createform(request):
 		form.save()
 		send_mail(subject, comment, email, recipients )
 
-		return HttpResponseRedirect('/home/success/')
+		
 	context = {'form': form}
 	return render(request, 'index.html', context)
 
