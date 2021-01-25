@@ -16,13 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from myapp.views import createform
-from myapp.views import success
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', createform, name='createform' ),
-    path('success/', success, name='success')
+
 
 
 ]
