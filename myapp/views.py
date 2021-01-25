@@ -20,7 +20,7 @@ def createform(request):
 		send_mail(subject, comment, email, recipients )
 
 		
-	context = {'form': form}
+	context = {'form': form,'name':name}
 	return render(request, 'index.html', context)
 
 
