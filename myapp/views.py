@@ -24,5 +24,4 @@ def createform(request):
 	return render(request, 'index.html', context)
 
 
-def success(request):
-	return render(request, 'success.html',{})
+
