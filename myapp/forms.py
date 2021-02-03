@@ -1,5 +1,5 @@
 from django import forms
-from .models import Artist, Event
+from .models import Artist,Event
 
 
 from django.core.exceptions import ValidationError
@@ -35,11 +35,12 @@ class ArtistForm(forms.ModelForm):
 
 
 
+
     class Meta:
       
         model = Artist
-        fields = ('Name', 'Telephone', 'Members','email', 'genre', 'Select_event', 'Additional_details')
-        widgets={'Select_event':forms.Select(attrs={'class':'form-control'})}
+        fields = ('Name', 'Telephone', 'Members','email', 'genre', 'Select_event', 'Additional_details', 'Have_you_worked_with_Arts2Life_UK_before', 'Have_you_received_copy_of_registration_form', 'Have_you_received_copy_of_contract_form')
+        widgets={'Select_event':forms.Select(attrs={'class':'form-control'}), 'Have_you_worked_with_Arts2Life_UK_before':forms.RadioSelect(attrs={'class':'form-control'}), 'Have_you_received_copy_of_registration_form':forms.RadioSelect(attrs={'class':'form-control'}), 'Have_you_received_copy_of_contract_form':forms.RadioSelect(attrs={'class':'form-control'})}
         def clean_email(self):
             email = self.cleaned_data.get('email')
             if  Artist.objects.filter(email=email).exists():
