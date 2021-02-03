@@ -14,7 +14,7 @@ def createform(request):
 		name= form.cleaned_data.get("Name")
 		email= form.cleaned_data.get("email")
 		subject= "New booking"
-		recipients = ['syraawan@live.com']
+		recipients = ['arts2lifeukevents@gmail.com']
 		comment= name + " with the email, " + email + ", has made request for new booking";
 		form.save()
 		send_mail(subject, comment, email, recipients )
