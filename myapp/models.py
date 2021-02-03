@@ -88,7 +88,7 @@ Arts2LifeUKEvents'''
     	messagef=message.format(name=instance.Name, event=instance.Select_event)
     	from_email = 'arts2lifeukbooking@gmail.com'
     	
-    	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com', 'arts2lifeukmail.com'] )
+    	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com'] )
     	#msg.attach_file("data/javascript.docx/")
     	msg.send()
     if instance.previous_instance().send_application == False and instance.send_application == True:
@@ -103,7 +103,7 @@ Arts2LifeUKEvents'''
     	messagef=message.format(name=instance.Name)
     	from_email = 'arts2lifeukbooking@gmail.com'
     	
-    	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com', 'arts2lifeukmail.com'] )
+    	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com'] )
     	msg.attach_file("data/registration.doc/")
     	msg.send()
     if instance.previous_instance().send_contract == False and instance.send_contract == True:
@@ -118,7 +118,7 @@ Arts2LifeUKEvents'''
     	messagef=message.format(name=instance.Name)
     	from_email = 'arts2lifeukbooking@gmail.com'
     	
-    	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com', 'arts2lifeukmail.com'] )
+    	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com'] )
     	msg.attach_file("data/contract.docx/")
     	msg.send()
     if instance.previous_instance().send_cancellation == False and instance.send_cancellation == True:
@@ -134,7 +134,7 @@ Arts2LifeUKEvents'''
     	messagef=message.format(name=instance.Name)
     	from_email = 'arts2lifeukbooking@gmail.com'
     	
-    	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com', 'arts2lifeukmail.com'] )
+    	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com'] )
     	#msg.attach_file("data/contract.docx/")
     	msg.send()
 
