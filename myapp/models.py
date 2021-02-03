@@ -1,4 +1,6 @@
 from django.db import models
+
+# Create your models herefrom django.db import models
 from django.core.mail import send_mail
 from django.dispatch import receiver
 from django.db.models.signals import pre_save
@@ -27,39 +29,48 @@ class Event(models.Model):
 	def __str__(self):
 		return f'{self.Event_Date} - {self.Position}'
 		
+		
 class Artist(ChangesMixin, models.Model):
-	Handled_by= models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-	Name = models.CharField(max_length = 200, null=True)
-	Telephone=models.CharField(max_length = 200, null=True) 
-	Members=models.IntegerField(blank=True, null=True)
-	email=models.EmailField(max_length=254)
-	genre=models.CharField(max_length = 200, null=True)
-	Select_event=models.ForeignKey(Event, on_delete=models.SET_NULL, null=True, blank=True)
-	pending='pending'
-
-	confirm='confirm'
-	cancel='cancel'
-	status_choice=[
+    yes='yes'
+    Handled_by= models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    Name = models.CharField(max_length = 200, null=True)
+    Telephone=models.CharField(max_length = 200, null=True)
+    Members=models.IntegerField(blank=True, null=True)
+    email=models.EmailField(max_length=254)
+    genre=models.CharField(max_length = 200, null=True)
+    Select_event=models.ForeignKey(Event, on_delete=models.SET_NULL, null=True, blank=True)
+    pending='pending'
+    confirm='confirm'
+    cancel='cancel'
+    no='no'
+    status_choice=[
 	(pending,'pending'),
 	(confirm,'confirm'),
 	(cancel,'cancel')
 	]
-	Status=models.CharField(
+    Status=models.CharField(
 		max_length=20,
         choices=status_choice,
         default=pending
         )
-	Additional_details=models.TextField(blank=True, null=True)
-	timestamp=models.DateTimeField(auto_now_add=True)
-	send_confirmation=models.BooleanField(default=False)
-	send_application= models.BooleanField(default=False)
-	send_contract=models.BooleanField(default=False)
-	send_cancellation=models.BooleanField(default=False)
-	
-
-
-	def __str__(self):
-		return f'{self.Name} has status {self.Status} booked on  {self.timestamp} is handled by {self.Handled_by} has booked for the following:  [ {self.Select_event}]'
+    Additional_details=models.TextField(blank=True, null=True)
+    timestamp=models.DateTimeField(auto_now_add=True)
+    send_confirmation=models.BooleanField(default=False)
+    send_application= models.BooleanField(default=False)
+    send_contract=models.BooleanField(default=False)
+    send_cancellation=models.BooleanField(default=False)
+    bool_choices=[(yes, 'yes'),(no, 'no')]
+    Have_you_worked_with_Arts2Life_UK_before=models.CharField(max_length=20,
+        choices=bool_choices,
+        default=no)
+    Have_you_received_copy_of_registration_form=models.CharField(max_length=20,
+        choices=bool_choices,
+        default=no)
+    Have_you_received_copy_of_contract_form=models.CharField(max_length=20,
+        choices=bool_choices,
+        default=no)
+    def __str__(self):
+        return f'{self.Name} has status {self.Status} booked on  {self.timestamp} is handled by {self.Handled_by} has booked for the following:  [ {self.Select_event}]'
 
 
 @receiver(pre_save, sender=Artist)
@@ -126,3 +137,9 @@ Arts2LifeUKEvents'''
     	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com', 'arts2lifeukmail.com'] )
     	#msg.attach_file("data/contract.docx/")
     	msg.send()
+
+
+
+
+
+
