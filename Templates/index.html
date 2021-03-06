@@ -2,6 +2,20 @@
 <!doctype html>
   <html>
   <head>
+    <style>
+.button {
+  background-color: #e7e7e7;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
         
           <title>{% block head_title %}Book Event{% endblock head_title %}</title>
          
@@ -30,7 +44,7 @@
     {% csrf_token %} 
     {{ form|crispy }} <br><br>
 
-    <input  class="btn" style="color: black" type="submit" value="Submit"> 
+    <input  class="btn button" type="submit" value="Submit"> 
     </div>
 </form> 
 
