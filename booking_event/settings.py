@@ -130,7 +130,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL='/image/'
 STATIC_ROOT=os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIR=[os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS=[os.path.join(BASE_DIR, 'static')]
 
 
 EMAIL_HOST= 'smtp.gmail.com'
