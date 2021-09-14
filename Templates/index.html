@@ -17,6 +17,18 @@
   margin: 4px 2px;
   cursor: pointer;
 }
+.header img {
+  float: left;
+  width: 100px;
+  height: 100px;
+  background: #555;
+}
+
+.header h1 {
+  position: relative;
+  top: 18px;
+  left: 10px;
+}
 
 </style>
         
@@ -39,12 +51,16 @@
 
 
 {% else %}
+          
           <div class="header">
+  <img src="{% static 'image/logo2.png' %}" >
+  <h1 style="font-family: 'Gothic A1';">Arts2Life Book Event</h1>
+</div>
+          
            
-           <img src="{% static 'image/logo2.png' %}" >
+           
 
-        	<div style="font-family: 'Gothic A1';"><h1>Arts2Life Book Event</h1></div>
-            </div>
+     
         	<br>
 
 
