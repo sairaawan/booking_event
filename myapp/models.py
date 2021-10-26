@@ -111,7 +111,7 @@ Arts2LifeUK Events'''
         from_email = 'arts2lifeukbooking@gmail.com'
         
         msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com'] )
-        msg.attach_file("data/registration.doc/")
+        msg.attach_file("data/registration.docx/")
         msg.send()
     if instance.previous_instance().send_contract == False and instance.send_contract == True:
         subject = 'Contract'
@@ -128,6 +128,7 @@ Arts2LifeUKEvents'''
     if instance.previous_instance().send_cancellation == False and instance.send_cancellation == True:
         subject = 'Booking status: cancelled'
         message = '''Dear {name},
+        
 We are so sorry but we have been unable to book your act to perform.
 
 This is rubbish news but please check out the availability of our other events and get booked in 
