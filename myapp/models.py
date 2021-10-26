@@ -57,7 +57,7 @@ class Artist(ChangesMixin, models.Model):
     timestamp=models.DateTimeField(auto_now_add=True)
     send_confirmation=models.BooleanField(default=False)
     send_application= models.BooleanField(default=False)
-    #send_contract=models.BooleanField(default=False)
+    send_contract=models.BooleanField(default=False)
     send_cancellation=models.BooleanField(default=False)
     bool_choices=[(yes, 'yes'),(no, 'no')]
     Have_you_worked_with_Arts2Life_UK_before=models.CharField(max_length=20,
