@@ -79,7 +79,7 @@ def send_email_if_flag_enabled(sender, instance, **kwargs):
         subject = 'Booking Confirmation'
         message = '''Hello {name},
 
-Great news! This email is to confirm that we have you booked in to be performing with us on {Select_event}
+Great news! This email is to confirm that we have you booked in to be performing with us 
 Our events team will be in touch with you shortly with the contract so please make sure to keep 
 an eye on out for any new emails.
 
@@ -128,7 +128,7 @@ Arts2LifeUKEvents'''
     if instance.previous_instance().send_cancellation == False and instance.send_cancellation == True:
         subject = 'Booking status: cancelled'
         message = '''Dear {name},
-We are so sorry but we have been unable to book your act to perform on {Select_event}
+We are so sorry but we have been unable to book your act to perform.
 
 This is rubbish news but please check out the availability of our other events and get booked in 
 for them. You can do this via the drop-down list on the arts2life.co.uk event booking page or just
