@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '#ti98$+63#u_jo$g%h#56pks78qp8%x#=m38oy06o$uc^2-zpr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','bookingevent.herokuapp.com']
 
@@ -128,10 +128,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL='/image/'
 STATIC_ROOT=os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS=[os.path.join(BASE_DIR, 'static')]
 
+EMAIL_USE_TLS= True
 EMAIL_HOST= 'smtp.gmail.com'
 EMAIL_HOST_USER= 'arts2lifeukbooking@gmail.com'
 EMAIL_HOST_PASSWORD= 'tjourdxyborqohnw'
-EMAIL_USE_TLS= True
 EMAIL_PORT= 587
