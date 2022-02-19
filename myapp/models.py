@@ -12,24 +12,24 @@ from django.core.exceptions import ValidationError
 # Create your models here.
 User = settings.AUTH_USER_MODEL
 class Event(models.Model):
-	
-	Event_Date=models.DateField()
-	Available='Available'
-	Booked='Booked'
-	Position_choice=[
-	(Available, 'Available'),
-	(Booked, 'Booked')]
-	Position=models.CharField(
-		max_length=20,
+    
+    Event_Date=models.DateField()
+    Available='Available'
+    Booked='Booked'
+    Position_choice=[
+    (Available, 'Available'),
+    (Booked, 'Booked')]
+    Position=models.CharField(
+        max_length=20,
         choices=Position_choice,
         default=Available
         )
 
 
-	def __str__(self):
-		return f'{self.Event_Date} - {self.Position}'
-		
-		
+    def __str__(self):
+        return f'{self.Event_Date} - {self.Position}'
+        
+        
 class Artist(ChangesMixin, models.Model):
     yes='yes'
     Handled_by= models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
@@ -44,12 +44,12 @@ class Artist(ChangesMixin, models.Model):
     cancel='cancel'
     no='no'
     status_choice=[
-	(pending,'pending'),
-	(confirm,'confirm'),
-	(cancel,'cancel')
-	]
+    (pending,'pending'),
+    (confirm,'confirm'),
+    (cancel,'cancel')
+    ]
     Status=models.CharField(
-		max_length=20,
+        max_length=20,
         choices=status_choice,
         default=pending
         )
@@ -76,69 +76,75 @@ class Artist(ChangesMixin, models.Model):
 @receiver(pre_save, sender=Artist)
 def send_email_if_flag_enabled(sender, instance, **kwargs):
     if instance.previous_instance().send_confirmation == False and instance.send_confirmation == True:
-    	subject = 'Booking Confirmation'
-    	message = '''Dear {name},
-Event name : {event}
+        subject = 'Booking Confirmation'
+        message = '''Hello {name},
 
-You have been selected to participate in the event detailed above - we're excited to have you! 
-Please check your emails as a copy of our Performance Contract will be issued to you from the Events team in due course (unless you already have an active one).
-Regards,
+Great news! This email is to confirm that we have you booked in to be performing with us 
+Our events team will be in touch with you shortly with the contract so please make sure to keep 
+an eye on out for any new emails.
 
-Arts2LifeUKEvents'''
-    	messagef=message.format(name=instance.Name, event=instance.Select_event)
-    	from_email = 'arts2lifeukbooking@gmail.com'
-    	
-    	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com'] )
-    	#msg.attach_file("data/javascript.docx/")
-    	msg.send()
+We really look forward to working with you!
+
+Best regards,
+
+Arts2LifeUK Events'''
+        messagef=message.format(name=instance.Name, event=instance.Select_event)
+        from_email = 'arts2lifeukbooking@gmail.com'
+        
+        msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com'] )
+        #msg.attach_file("data/javascript.docx/")
+        msg.send()
     if instance.previous_instance().send_application == False and instance.send_application == True:
-    	subject = 'Application form'
-    	message = '''Dear {name},
+        subject = 'Application form'
+        message = '''Hey {name},
 
-Plesae find the attached application form and return it back by replying to this email.
+We are very excited that you have reached out to us, thank you! The registration form is 
+attached to this email; if you could complete it (the more info you include, the better) and get it 
+back to us ASAP, we can go from there. 
 
-Regards,
+Looking forward to working with you! 
 
-Arts2LifeUKEvents'''
-    	messagef=message.format(name=instance.Name)
-    	from_email = 'arts2lifeukbooking@gmail.com'
-    	
-    	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com'] )
-    	msg.attach_file("data/registration.doc/")
-    	msg.send()
+Best regards,
+
+Arts2LifeUK Events'''
+        messagef=message.format(name=instance.Name)
+        from_email = 'arts2lifeukbooking@gmail.com'
+        
+        msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com'] )
+        msg.attach_file("data/registration.docx/")
+        msg.send()
     if instance.previous_instance().send_contract == False and instance.send_contract == True:
-    	subject = 'Contract'
-    	message = '''Dear {name},
-
+        subject = 'Contract'
+        message = '''Dear {name},
 Plesae find the attached contract form and return it back by replying to this email.
-
 Regards,
-
 Arts2LifeUKEvents'''
-    	messagef=message.format(name=instance.Name)
-    	from_email = 'arts2lifeukbooking@gmail.com'
-    	
-    	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com'] )
-    	msg.attach_file("data/contract.docx/")
-    	msg.send()
+        messagef=message.format(name=instance.Name)
+        from_email = 'arts2lifeukbooking@gmail.com'
+        
+        msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com'] )
+        msg.attach_file("data/contract.docx/")
+        msg.send()
     if instance.previous_instance().send_cancellation == False and instance.send_cancellation == True:
-    	subject = 'Booking status: cancelled'
-    	message = '''Dear {name},
+        subject = 'Booking status: cancelled'
+        message = '''Dear {name},
+        
+We are so sorry but we have been unable to book your act to perform.
 
-Please be advised that you have not been selected to perform as we don't think this date is the best fit for your act. 
-We'd still love to have you perform with us, so please select another date from the drop-down list. If you have any questions, please feel free to contact the Events team.
+This is rubbish news but please check out the availability of our other events and get booked in 
+for them. You can do this via the drop-down list on the arts2life.co.uk event booking page or just
+send an email over to our Events Manager (arts2lifeukevents@gmail.com) and they will get 
+back to you ASAP. 
 
-Regards,
+Best regards and hopefully see you soon,
 
-Arts2LifeUKEvents'''
-    	messagef=message.format(name=instance.Name)
-    	from_email = 'arts2lifeukbooking@gmail.com'
-    	
-    	msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com'] )
-    	#msg.attach_file("data/contract.docx/")
-    	msg.send()
-
-
+Arts2LifeUK Events'''
+        messagef=message.format(name=instance.Name)
+        from_email = 'arts2lifeukbooking@gmail.com'
+        
+        msg=EmailMessage(subject, messagef,from_email, [instance.email],reply_to=['arts2lifeukevents@gmail.com'] )
+        #msg.attach_file("data/contract.docx/")
+        msg.send()
 
 
 

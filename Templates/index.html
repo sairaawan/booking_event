@@ -1,13 +1,43 @@
 {% load crispy_forms_tags %}
+{% load static %}
 <!doctype html>
   <html>
   <head>
+    <style>
+.button {
+  background-color: #ec4b28;
+  border: none;
+  font-family: 'Sora', sans-serif;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.header img {
+  float: left;
+  width: 150px;
+  height: 50px;
+  background: #555;
+  border-radius: 25px;
+}
+
+.header h1 {
+  position: relative;
+  top: 18px;
+  left: 10px;
+}
+
+</style>
         
-          <title>{% block head_title %}Book Event{% endblock head_title %}</title>
+          <title >A2L Book Event</title>
          
 
      </head>  
-      <body style="font-size: 20px; color: grey; background-color: black">
+      <body style="font-size: 20px; color: #1f90ff; background-color: #141427; font-family: 'Nunito Sans';">
 
         <div class="container col-4 offset-4 mb-5 mt-5" style=""> 
           
@@ -22,15 +52,24 @@
 
 
 {% else %}
-        	<div class="page-header"><h1>Book Event</h1></div>
-        	<br>
+          
+          <div class="header">
+  <img src="{% static 'image/white.svg' %}" >
+  <h1 style="font-family: 'Gothic A1';">Arts2Life Book Event</h1>
+</div>
+          
+           
+           
+
+     
+        	<br>	<br>	<br>	<br>
 
 
 <form method="POST" enctype="multipart/form-data" action="" class="form-group " > 
     {% csrf_token %} 
     {{ form|crispy }} <br><br>
 
-    <input  class="btn" style="color: black" type="submit" value="Submit"> 
+    <input  class="btn button" type="submit" value="Submit"> 
     </div>
 </form> 
 
@@ -39,10 +78,11 @@
 </div>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&family=Sora:wght@600&display=swap" rel="stylesheet">
 <!-- Optional theme -->
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@700;900&family=Sora:wght@600&display=swap" rel="stylesheet">
 <script src= 'https://code.jquery.com/jquery-3.5.0.min.js'></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
