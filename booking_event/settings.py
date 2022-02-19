@@ -132,6 +132,6 @@ STATIC_ROOT=os.path.join(BASE_DIR, 'staticfiles')
 
 EMAIL_HOST= 'smtp.gmail.com'
 EMAIL_HOST_USER= 'arts2lifeukbooking@gmail.com'
-EMAIL_HOST_PASSWORD= 'AccessBooking$13'
+EMAIL_HOST_PASSWORD= 'tjourdxyborqohnw'
 EMAIL_USE_TLS= True
 EMAIL_PORT= 587
